@@ -9,7 +9,7 @@ Package for creating Gulp.Js tasks using some of the new ES2015 features:
 
 ## 1- Requirements
 
- In order to use some of the EcmaScript 2015 features you need to install thoses dependencies:
+ In order to use some of the EcmaScript 2015 features you need to install these dependencies:
 
  - [babel-core](https://github.com/babel/babel/tree/master/packages/babel-preset-es2015) Babel preset for es2015 plugins
 
@@ -21,7 +21,7 @@ To install those dependencies located in the `devDependencies`section of the `pa
 
     npm install
 
-## 2. After install all those dependencies using the previous command, you need to create a `.babelrc` configuration file with the next options:
+## 2. After install process of all those dependencies using the previous command, you need to create a `.babelrc` configuration file with the next options:
 
 ```
 {
@@ -76,11 +76,11 @@ Let's go to review the `Jade2HTMLTransformer` transformer class to review some o
 
  - We need to use only one `require` expression to get access to the `babel-register` package. It allows us to use the `import` expressions replacing all the `require` module imports.
  
- - We use the `import` expressions in order to import all required modules. In our example we need: `gulp` and `gulp-pub` (the new name for the `gulp-jade` package.
+ - We use the `import` expressions in order to import all required modules. In our example we need: `gulp` and `gulp-pub` (the new name for the `gulp-jade` package).
  
- - The next step is define your own Tranformer class. You may use an abstract class to inherits from that, or use directly one specific CustomTransformer class. In our example `Jade2HTMLTransformer` we only uses that specific class.
+ - The next step is define your own Tranformer class. You may use an abstract class to inherits from that, or use directly one specific CustomTransformer class. In our example `Jade2HTMLTransformer` we only use that specific class.
  
- - That class is only available when you uses the ES2015 feature through EcmaScript or using TypeScript (a superset of ES2015). This class includes some new ES2015 features as:
+ - That class is only available when you uses the ES2015 feature through **EcmaScript** or using **TypeScript** (a superset of ES2015). This class includes some new ES2015 features such as:
  
   - Class constructors with params.
   - Custom methods, in our case the transform method.
@@ -93,10 +93,11 @@ Let's go to review the `Jade2HTMLTransformer` transformer class to review some o
   - Use the `gulp-pug` imported function to execute with the `pipe` process of gulp.
   - Get the destination folder to put the HTML resulting of the process.
 
+ > We will be adding some additional options to extends the Transformer Classes using the **Decorator Pattern** to provide them the possibility of chain different related utility processss.
 
 ## 5- Populate your gulpfile.babel.js with your custom Transformer Tasks
 
- When you need to execute a custom **GulpJS Transform Task** you need to create a general tasks that calls your custom Transformer Class as following:
+ When you need to execute a custom **GulpJS Transform Task**, you need to create a general tasks that calls your custom Transformer Class as following:
  
  ```javascript
 import gulp from 'gulp';
@@ -122,11 +123,16 @@ gulp.task('Jade2HTML', () => {
   
   - Declare a variable to get an instance of the Custom Transformer.
   
-  - Create your general task, give it a name and you may use a generic classical function or use, as you may see an arrow function to reduce the complexity of the code. In our case we uses an arrow function with no params and using the  transform method of the `jade2htmlTransformer` with the two required params of the class method, a) the source folder, and b) the destination folder.
+  - Create your general task, give it a name and you may use a generic classical function or use, as you may see an **arrow function** to reduce the complexity of the code. In our case we uses an arrow function, with no params, and using the  transform method of the `jade2htmlTransformer` which requiress the two params of the class method, a) the source folder, and b) the destination folder.
   
   > You may use Array or String params for the source and destination folders.
   
   > Alternatively you may use the second commented version of the `Jade2HTMLTransformer` constructor.
+
+  ```
+  (new Jade2HTMLTransformer({pretty: true}))
+       .transform('Examples/Jade2HTML/templates/*.jade', 'dist');
+  ```
 
 ## 6- The Gulp task execution process
 
@@ -142,10 +148,11 @@ In order to execute your custom GulpJS Transformer you need to run:
  [HH:MM:SS] Starting 'Jade2HTML'...
  [HH:MM:SS] Finished 'Jade2HTML' after 12 ms
  ```
+ Then review your `dist` or custom destination folder to the **HTML** resulting files.
  
 ## 6- Other information
 
-As you may have seen, we are using JSDoc annotation, for get more knowledge about that go to the next site [JSDoc](http://usejsdoc.org/)
+As you may have seen, we are using **JSDoc** annotation, for get more knowledge about that go to the next site [JSDoc](http://usejsdoc.org/)
 
 ## 7- Folder Structure of the Package
 
